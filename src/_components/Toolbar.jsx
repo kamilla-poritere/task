@@ -14,7 +14,8 @@ export const Toolbar = () => {
   }, []);
 
   const logout = () => {
-    
+    dispatch(userActions.logout());
+    history.push("/");
   }
 
   return (

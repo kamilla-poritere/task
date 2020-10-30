@@ -1,9 +1,30 @@
 import config from "config";
 
 export const userService = {
+  login,
+  logout,
   getAll,
   getById,
 };
+
+function login(email, password) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  };
+
+  return fetch(`${config.baseUrl}/login`, requestOptions)
+    .then(handleResponse)
+    .then((user) => {
+      localStorage.setItem("user", JSON.stringify(user));
+      return user;
+    });
+}
+
+function logout() {
+  localStorage.removeItem("user");
+}
 
 function getAll(page) {
   const requestOptions = {
