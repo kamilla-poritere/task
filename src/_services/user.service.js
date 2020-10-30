@@ -3,6 +3,7 @@ import config from "config";
 export const userService = {
   login,
   logout,
+  register,
   getAll,
   getById,
 };
@@ -44,6 +45,18 @@ function getById(id) {
   };
 
   return fetch(`${config.baseUrl}/users/${id}`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function register(user) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  };
+
+  return fetch(`${config.baseUrl}/register`, requestOptions).then(
     handleResponse
   );
 }
