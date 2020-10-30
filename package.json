@@ -1,7 +1,7 @@
 {
   "name": "test-task",
   "description": "Test task",
-  "version": "1.0.0",
+  "version": "1.0",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open"
