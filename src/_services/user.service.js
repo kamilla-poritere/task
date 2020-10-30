@@ -6,6 +6,7 @@ export const userService = {
   register,
   getAll,
   getById,
+  update,
 };
 
 function login(email, password) {
@@ -57,6 +58,18 @@ function register(user) {
   };
 
   return fetch(`${config.baseUrl}/register`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function update(name, job, id) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, job }),
+  };
+
+  return fetch(`${config.baseUrl}/users/${id}`, requestOptions).then(
     handleResponse
   );
 }

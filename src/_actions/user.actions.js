@@ -9,6 +9,7 @@ export const userActions = {
   register,
   getAll,
   getById,
+  update,
 };
 
 function login(email, password, data) {
@@ -110,5 +111,31 @@ function getById(id) {
   }
   function failure(error) {
     return { type: userConstants.GETBYID_FAILURE, error };
+  }
+}
+
+function update(name, job, id) {
+  return (dispatch) => {
+    dispatch(request({ name, job, id }));
+
+    userService.update(name, job, id).then(
+      (user) => {
+        dispatch(success(user));
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(user) {
+    return { type: userConstants.UPDATE_REQUEST, user };
+  }
+  function success(user) {
+    return { type: userConstants.UPDATE_SUCCESS, user };
+  }
+  function failure(error) {
+    return { type: userConstants.UPDATE_FAILURE, error };
   }
 }
